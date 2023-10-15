@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      2.2.1
+// @version      3.3.2
 // @author       You
 // @match        https://*.blooket.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=blooket.com
