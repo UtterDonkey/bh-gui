@@ -2,12 +2,12 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      3.3.2
+// @version      2.2.2
 // @author       You
 // @match        https://*.blooket.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=blooket.com
-// @downloadURL  https://github.com/UtterDonkey/bh-gui/raw/main/userscript.js
-// @updateURL    https://github.com/UtterDonkey/bh-gui/raw/main/userscript.js
+// @downloadURL  https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/user.js
+// @updateURL    https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/user.js
 // @grant        none
 // ==/UserScript==
 const ico = document.createElement('img');
