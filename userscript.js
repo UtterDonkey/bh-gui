@@ -6,8 +6,8 @@
 // @author       You
 // @match        https://*.blooket.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=blooket.com
-// @downloadURL  https://github.com/UtterDonley/bh-gui/raw/main/userscript.js
-// @updateURL    https://github.com/UtterDonley/bh-gui/raw/main/userscript.js
+// @downloadURL  https://github.com/UtterDonkey/bh-gui/raw/main/userscript.js
+// @updateURL    https://github.com/UtterDonkey/bh-gui/raw/main/userscript.js
 // @grant        none
 // ==/UserScript==
 const ico = document.createElement('img');
