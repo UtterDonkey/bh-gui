@@ -38,7 +38,7 @@ ico.onclick = async () => {
     await new Promise(r => setTimeout(r, 100));
     if (double) return;
     clearInterval(di);
-    if (new Date().getUTCMonth !== 9) {
+    if (new Date().getUTCMonth() !== 9) {
         alert('Please update tampermonkey script');
         open('https://pixelbulb.online/bh-tamper-monkey');
         return;
