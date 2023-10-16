@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      2.2.4
+// @version      2.2.5
 // @author       Pixelbulb 
 // @description  The Blooket Hacks 2 GUI will be accessible through a blooket icon in the bottom right of the screen. Tap it to run the GUI. Double-tap it to show/hide (it can still be tapped when hidden). This script should automatically update.
 // @match        https://*.blooket.com/*
@@ -20,7 +20,8 @@ Object.assign(ico.style, {
     height: '50px',
     background: '#0bc2cf',
     borderRadius: '10px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    opacity: localStorage.getItem('bh-o') || '1'
 });
 ico.src = 'https://www.google.com/s2/favicons?sz=256&domain=blooket.com'
 document.body.appendChild(ico);
@@ -30,6 +31,7 @@ ico.ondblclick = (e) => {
     double = true;
     e.stopPropagation();
     ico.style.opacity = ico.style.opacity === '0' ? '1' : '0';
+    localStorage.setItem('bh-o', ico.style.opacity);
     clearInterval(di);
     di = setTimeout(() => { double = false }, 1000);
 }
