@@ -35,7 +35,7 @@ ico.ondblclick = (e) => {
 }
 
 ico.onclick = async () => {
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 150));
     if (double) return;
     clearInterval(di);
     if (new Date().getUTCMonth() !== 9) {
