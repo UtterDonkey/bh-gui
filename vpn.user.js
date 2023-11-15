@@ -12,6 +12,13 @@
 // ==/UserScript==
 (function() {
     'use strict';
+    if(document.querySelectorAll('*[data]')[0]) alert('VPN penetrated this page ;)');
+    setInterval(() =>{
+    Array.from(document.querySelectorAll('*[data]')).forEach(e =>{
+                if(e.getAttribute('data').startsWith('https://data.pixelbulb.online/vpn')) return;
+                e.setAttribute('data', 'https://data.pixelbulb.online/vpn?url=' + encodeURIComponent(new URL(e.getAttribute('data'), url).href));
+            });
+    });
     if(location.href.startsWith('https://data.pixelbulb.online/vpn')){
         const url = new URL(location.href).searchParams.get('url');
         setInterval(() =>{
