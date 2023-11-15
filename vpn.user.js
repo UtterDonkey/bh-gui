@@ -12,7 +12,7 @@
 // ==/UserScript==
 (function() {
     'use strict';
-    const url = new URL(location.href).searchParams.get('url');
+    const url = location.href.startsWith('https://data.pixelbulb.online/vpn') ? new URL(location.href).searchParams.get('url') : location.href;
     if(document.querySelectorAll('*[data]')[0]) alert('VPN penetrated this page ;)');
     setInterval(() =>{
     Array.from(document.querySelectorAll('*[data]')).forEach(e =>{
@@ -21,7 +21,7 @@
             });
     });
     if(location.href.startsWith('https://data.pixelbulb.online/vpn')){
-        c
+        
         setInterval(() =>{
             Array.from(document.querySelectorAll('*[href]')).forEach(e =>{
                 if(e.getAttribute('href').startsWith('https://data.pixelbulb.online/vpn')) return;
