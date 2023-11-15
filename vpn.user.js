@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         VPN
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=microsoft.com
+// @downloadURL  https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/vpn.user.js
+// @updateURL    https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/vpn.user.js
 // @grant        none
 // ==/UserScript==
 (function() {
