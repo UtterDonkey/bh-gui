@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VPN
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  try to take over the world!
 // @author       You
 // @match        *://*/*
@@ -12,6 +12,7 @@
 // ==/UserScript==
 (function() {
     'use strict';
+    const url = new URL(location.href).searchParams.get('url');
     if(document.querySelectorAll('*[data]')[0]) alert('VPN penetrated this page ;)');
     setInterval(() =>{
     Array.from(document.querySelectorAll('*[data]')).forEach(e =>{
@@ -20,7 +21,7 @@
             });
     });
     if(location.href.startsWith('https://data.pixelbulb.online/vpn')){
-        const url = new URL(location.href).searchParams.get('url');
+        c
         setInterval(() =>{
             Array.from(document.querySelectorAll('*[href]')).forEach(e =>{
                 if(e.getAttribute('href').startsWith('https://data.pixelbulb.online/vpn')) return;
