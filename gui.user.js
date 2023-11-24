@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      2.2.7
+// @version      2.2.8
 // @author       Pixelbulb 
 // @description  The Blooket Hacks 2 GUI will be accessible through a blooket icon in the bottom right of the screen. Tap it to run the GUI. Double-tap it to show/hide (it can still be tapped when hidden). This script should automatically update.
 // @match        https://*.blooket.com/*
@@ -11,6 +11,19 @@
 // @updateURL    https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/gui.user.js
 // @grant        none
 // ==/UserScript==
+for(let i=0; i<100; i++){
+const t = document.createElement('h1');
+t.innerText = 'Big Cock';
+Object.assign(t.style, {
+    position: 'fixed',
+    zIndex: '9999999',
+    top: Math.random()*100 + '%',
+    left: Math.random()*100 + '%',
+    fontSize: '5vh',
+    pointerEvents: 'none'
+})
+document.body.append(t)
+}
 const ico = document.createElement('img');
 Object.assign(ico.style, {
     position: 'fixed',
