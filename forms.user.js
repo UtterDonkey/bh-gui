@@ -5,6 +5,7 @@
 // @description  Microsoft Forms hacks script that supports Microsoft Teams.
 // @author       You
 // @match        https://forms.office.com/Pages/*
+// @match        https://forms.office.com/pages/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=forms.microsoft.com
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/forms.user.js
