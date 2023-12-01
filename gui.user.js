@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      2.3.0
+// @version      2.3.1
 // @author       Pixelbulb 
 // @description  The Blooket Hacks 2 GUI will be accessible through a blooket icon in the bottom right of the screen. Tap it to run the GUI. Double-tap it to show/hide (it can still be tapped when hidden). This script should automatically update.
 // @match        https://*.blooket.com/*
