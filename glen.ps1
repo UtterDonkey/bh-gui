@@ -109,7 +109,7 @@ try
 ## Open the background song
 $script = @'
    $player = New-Object -ComObject 'MediaPlayer.MediaPlayer'
-   $player.Open("http://www.leeholmes.com/projects/ps_html5/background.mp3")
+   $player.Open("https://utterdonkey.github.io/China-is-not-real/ambient.mp3")
    $player
 '@
 
