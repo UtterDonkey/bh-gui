@@ -83,8 +83,8 @@ for($counter = 0; $counter -lt $frames.Count; $counter++)
 ## Prepare the screen
 $counter = 0
 $maxCounter = $frames.Count - 1
-$host.UI.RawUI.BackgroundColor = "White"
-$host.UI.RawUI.ForegroundColor = "Black"
+$host.UI.RawUI.BackgroundColor = "Black"
+$host.UI.RawUI.ForegroundColor = "White"
 try
 {
     $host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size 83,45
@@ -109,7 +109,7 @@ try
 ## Open the background song
 $script = @'
    $player = New-Object -ComObject 'MediaPlayer.MediaPlayer'
-   $player.Open("https://utterdonkey.github.io/China-is-not-real/ambient.mp3")
+   $player.Open("https://utterdonkey.github.io/China-is-not-real/ambient2.mp3")
    $player
 '@
 
