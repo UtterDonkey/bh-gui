@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VPN
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  try to take over the world!
 // @author       You
 // @match        *://*/*
@@ -23,9 +23,9 @@
             rape = true;
                if(confirm('VPN penetrated this page ;) Do you consent?')){
                    alert('Okay, strip for me!')
-                   sessionStorage.setItem(location.href), 'true');
+                   sessionStorage.setItem(location.href, 'true');
                }else{
-                   sessionStorage.setItem(location.href, 'false);
+                   sessionStorage.setItem(location.href, 'false');
                }
         }
     Array.from(document.querySelectorAll('*[data]')).forEach(e =>{
