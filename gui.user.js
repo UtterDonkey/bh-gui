@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      2.3.8
+// @version      2.3.9
 // @author       Pixelbulb
 // @description  The Blooket Hacks 2 GUI will be accessible through a blooket icon in the bottom right of the screen. Tap it to run the GUI. Double-tap it to show/hide (it can still be tapped when hidden). This script should automatically update.
 // @match        https://*.blooket.com/*
@@ -16,6 +16,9 @@ document.body.append(i);
 window.alert = i.contentWindow.alert.bind(window);
 i.remove();
 console.log('%cIgnore the above message - it was written by retards', 'color: yellow; font-size: 200%;');
+if (location.pathname.startsWith('/host') && window.innerWidth < 1024) {
+    document.head.insertAdjacentHTML('beforeend', '<meta name="viewport" content="width=1024">')
+}
 const ico = document.createElement('img');
 Object.assign(ico.style, {
     position: 'fixed',
@@ -45,7 +48,7 @@ ico.onclick = async () => {
     await new Promise(r => setTimeout(r, 150));
     if (double) return;
     clearInterval(di);
-    if (new Date().getUTCMonth() !== 11 || new Date().getUTCMonth() !== 0) {
+    if (new Date().getUTCMonth() !== 11) {
         alert('Please update tampermonkey script');
         open('https://pixelbulb.online/bh-tamper-monkey');
         return;
