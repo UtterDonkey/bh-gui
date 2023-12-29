@@ -6,7 +6,7 @@
 // @author       Pixelbulb
 // @description  The Blooket Hacks 2 GUI will be accessible through a blooket icon in the bottom right of the screen. Tap it to run the GUI. Double-tap it to show/hide (it can still be tapped when hidden). This script should automatically update.
 // @match        https://*.blooket.com/*
-// @match        https://pixelbulb.online/bh*
+// @match        https://pixelbulb.online/bh-*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=blooket.com
 // @downloadURL  https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/gui.user.js
 // @updateURL    https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/gui.user.js
