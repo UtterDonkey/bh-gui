@@ -16,19 +16,13 @@ document.body.append(i);
 window.alert = i.contentWindow.alert.bind(window);
 i.remove();
 console.log('%cIgnore the above message - it was written by retards', 'color: yellow; font-size: 200%;');
-(async () => {
-    await new Promise(resolve => {
-        const interval = setInterval(() => {
-            if (document.querySelector('[class*=__nothingText___]')) {
-                clearInterval(interval);
-                resolve();
-            }
-        });
-    });
-    if (location.pathname.startsWith('/host') && window.innerWidth < 1024) {
-        document.head.insertAdjacentHTML('beforeend', '<meta name="viewport" content="width=1024">');
+setInterval(async () => {
+    if (location.pathname.startsWith('/host') && window.innerWidth < 800 && (!document.querySelector('meta#desktop-view') || document.querySelector('meta[name=viewport]:not(#desktop-view)'))) {
+        document.head.insertAdjacentHTML('beforeend', '<meta id="desktop-view" name="viewport" content="width=800">');
     }
-})()
+}, 100);
+
+
 
 const ico = document.createElement('img');
 Object.assign(ico.style, {
