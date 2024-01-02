@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks - Helper
 // @namespace    http://tampermonkey.net/
-// @version      0.0.1
+// @version      0.0.2
 // @author       Pixelbulb
 // @description  This script provides the Blooket Hacks TamperMonkey script with extra features.
 // @match        https://*.blooket.com/*
@@ -15,10 +15,8 @@
 // @grant        GM_deleteValue
 // @grant        unsafeWindow
 // ==/UserScript==
-if (location.hostname === 'pixelbulb.online') {
-    window.tampermonkeyHelperInstalled = true;
-} else {
-  unsafeWindow.GM_setValue = (...d) => GM_setValue(...d);
-  unsafeWindow.GM_getValue = (...d) => GM_getValue(...d);
-  unsafeWindow.GM_deleteValue = (...d) => GM_deleteValue(...d);
-}
+window.tampermonkeyHelperInstalled = true;
+unsafeWindow.GM_setValue = (...d) => GM_setValue(...d);
+unsafeWindow.GM_getValue = (...d) => GM_getValue(...d);
+unsafeWindow.GM_deleteValue = (...d) => GM_deleteValue(...d);
+
