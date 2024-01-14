@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Forms Hacks Lite
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Microsoft Forms hacks script that supports Microsoft Teams.
 // @author       You
 // @match        https://forms.office.com/Pages/*
@@ -26,6 +26,16 @@
         });
         let formData = {};
 
+        function requestData(url) {
+            return fetch("https://data.pixelbulb.online/post-body", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ url }),
+            });
+        }
+
         function hackClient() {
             if (window.trueRequest) return;
             window.trueRequest = XMLHttpRequest;
@@ -42,7 +52,7 @@
                                 }
                             }, 100);
                         });
-                        await (await fetch("https://data.pixelbulb.online/forms?url=" + encodeURIComponent(location.href) + '&submit=' + encodeURIComponent(JSON.stringify({ response: this.responseText, form: formData })))).json();
+                        await (await requestData("/forms?url=" + encodeURIComponent(location.href) + '&submit=' + encodeURIComponent(JSON.stringify({ response: this.responseText, form: formData })))).json();
                     })();
                 }
                 return open.call(this, method, url, ...rest);
@@ -54,18 +64,17 @@
         const notice = document.createElement('span');
         notice.innerText = 'Loading Answers...';
         document.querySelector('div[data-automation-id=noticeContainer]').appendChild(notice);
-        const form = (await (await fetch('https://data.pixelbulb.online/forms?url=' + encodeURIComponent(location.href))).json());
+        const form = (await (await requestData('/forms?url=' + encodeURIComponent(location.href))).json());
         if (form.quizResult === null || form.error) {
-            const thisForm = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data.form;
-            formData = thisForm.questions;
-            const res = await (await fetch("https://data.pixelbulb.online/forms?questions=" + encodeURIComponent(JSON.stringify(formData.map(e => { return { id: e.id, question: e.title } }))))).json();
+            const formData = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data.form.questions;
+            const res = await (await requestData("/forms?questions=" + encodeURIComponent(JSON.stringify(formData.map(e => { return { id: e.id, question: e.title } }))))).json();
             Object.entries(res).forEach(result => {
                 const span = document.createElement('span');
                 span.innerHTML = '<hr>Possible answer: <b>' + result[1] + `${'<'}/b>`;
                 document.querySelector('span#QuestionInfo_' + result[0]).insertAdjacentElement('afterend', span);
             });
 
-            notice.innerText = Object.keys(res).length > 0 ? 'This form doesn\'t fully support answers yet. Found answers are Displayed in Bold.' : (JSON.parse(thisForm.settings).IsQuizMode ? 'This form doesn\'t support answers yet.' : 'This form isn\'t a quiz.');
+            notice.innerText = Object.keys(res).length > 0 ? 'This form doesn\'t fully support answers yet. Found answers are Displayed in Bold.' : 'This form doesn\'t support answers yet.';
             hackClient();
         } else {
 
@@ -86,7 +95,6 @@
                 document.querySelector('span#QuestionInfo_' + result.id).insertAdjacentElement('afterend', span);
             });
             notice.innerText = 'Answers are Displayed in Bold.';
-            hackClient();
         }
     })();
 })();
