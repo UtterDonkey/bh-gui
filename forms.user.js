@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Forms Hacks
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  Microsoft Forms hacks script that supports Microsoft Teams.
 // @author       You
 // @match        https://forms.office.com/Pages/*
