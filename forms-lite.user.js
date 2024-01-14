@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Forms Hacks Lite
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Microsoft Forms hacks script that supports Microsoft Teams.
 // @author       You
 // @match        https://forms.office.com/Pages/*
@@ -25,7 +25,7 @@
             });
         });
         let formData = {};
-
+    
         function requestData(url) {
             return fetch("https://data.pixelbulb.online/post-body", {
                 method: "POST",
@@ -35,7 +35,7 @@
                 body: JSON.stringify({ url }),
             });
         }
-
+    
         function hackClient() {
             if (window.trueRequest) return;
             window.trueRequest = XMLHttpRequest;
@@ -57,27 +57,36 @@
                 }
                 return open.call(this, method, url, ...rest);
             };
-
-
+    
+    
         }
-
+    
         const notice = document.createElement('span');
         notice.innerText = 'Loading Answers...';
         document.querySelector('div[data-automation-id=noticeContainer]').appendChild(notice);
+        function onElement(query, fn) {
+            const interval = setInterval(() => {
+                const q = document.querySelector(query);
+                if (q) {
+                    clearInterval(interval);
+                    fn(q);
+                }
+            });
+        }
         const form = (await (await requestData('/forms?url=' + encodeURIComponent(location.href))).json());
+        formData = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data.form.questions;
         if (form.quizResult === null || form.error) {
-            const formData = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data.form.questions;
             const res = await (await requestData("/forms?questions=" + encodeURIComponent(JSON.stringify(formData.map(e => { return { id: e.id, question: e.title } }))))).json();
             Object.entries(res).forEach(result => {
                 const span = document.createElement('span');
                 span.innerHTML = '<hr>Possible answer: <b>' + result[1] + `${'<'}/b>`;
                 document.querySelector('span#QuestionInfo_' + result[0]).insertAdjacentElement('afterend', span);
             });
-
+    
             notice.innerText = Object.keys(res).length > 0 ? 'This form doesn\'t fully support answers yet. Found answers are Displayed in Bold.' : 'This form doesn\'t support answers yet.';
-            hackClient();
+    
         } else {
-
+    
             const results = JSON.parse(form.quizResult);
             notice.innerText = 'Loading Form Data...';
             const questions = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data.form.questions;
@@ -86,15 +95,18 @@
                 const result = results.find(e => e.id == q.id);
                 if (!result) return;
                 if (!(question.Choices || result.gradingBasis)) return;
-
-
+    
+    
                 const basis = JSON.parse(result.gradingBasis || '[{}]')[0];
-                const correctAnswer = result.gradingBasis ? basis.answers ? basis.answers.join(', ') : basis.answer : question.Choices.map(e => e.Description).filter((e, i) => result.answerKeys[i]).join(', ');
+                const correctAnswer = q.type === 'Question.Ranking' ? q.choices.toSorted((a, b) => a.order - b.order).map(e => e.displayText).join(', ') : (result.gradingBasis ? basis.answers ? basis.answers.join(', ') : basis.answer : question.Choices.map(e => e.Description).filter((e, i) => result.answerKeys[i]).join(', '));
                 const span = document.createElement('span');
                 span.innerHTML = '<hr><b>' + correctAnswer + `${'<'}/b>`;
-                document.querySelector('span#QuestionInfo_' + result.id).insertAdjacentElement('afterend', span);
+                onElement('span#QuestionInfo_' + result.id, e => {
+                    e.insertAdjacentElement('afterend', span);;
+                });
             });
             notice.innerText = 'Answers are Displayed in Bold.';
         }
+        hackClient();
     })();
 })();
