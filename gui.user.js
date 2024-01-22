@@ -23,7 +23,14 @@ if (location.hostname === 'pixelbulb.online') {
     if (!('tampermonkeyHelperInstalled' in window)) {
         if (localStorage.getItem('tampermonkeyHelperPrompt') !== '2.4.8') {
             localStorage.setItem('tampermonkeyHelperPrompt', '2.4.8');
-            if (confirm('The Tampermonkey Helper Script offers improvements to Blooket Hacks. Would you like to install it?')) window.open('https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/helper.user.js');
+            if (confirm('The Tampermonkey Helper Script offers improvements to Blooket Hacks. Would you like to install it?')) {
+                const newWin = window.open('https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/helper.user.js');
+                if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+                    document.body.addEventListener('click', () => {
+                        window.open('https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/helper.user.js');
+                    }, { once: true });
+                }
+            }
         }
 
     }
