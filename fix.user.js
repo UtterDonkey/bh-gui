@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Shitty School Internet Fix
 // @namespace    http://tampermonkey.net/
-// @version      1.0.1
+// @version      1.0.2
 // @author       Pixelbulb
 // @description  Attempts to fix some of the shitty school internet problems.
 // @match        *://*/*
@@ -26,4 +26,4 @@ const observer = new MutationObserver(mutations =>{
     }
 });
 observer.observe(document.body,  { childList: true, subtree: true });
-document.querySelectorAll('*[src]').forEach(e =>e.setAttribute('src', e.getAttribute('src')));
+document.querySelectorAll('*[src]').forEach(e => ($0.naturalHeight || $0.naturalWidth) ? void 0 : e.setAttribute('src', e.getAttribute('src')));
