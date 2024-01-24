@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Shitty School Internet Fix
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      1.0.1
 // @author       Pixelbulb
 // @description  Attempts to fix some of the shitty school internet problems.
 // @match        *://*/*
