@@ -12,7 +12,7 @@
 // @updateURL    https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/fix.user.js
 // @grant        none
 // ==/UserScript==
-const observer = new MutationObserver(mutations =>{a
+const observer = new MutationObserver(mutations =>{
     for(const mutation of mutations) {
         for(const element of mutation.addedNodes) {
             let tries = 0;
