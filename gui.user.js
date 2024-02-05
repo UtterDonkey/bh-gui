@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Cheeky Wee Blooket Hacks
 // @namespace    http://tampermonkey.net/
-// @version      2.4.8
+// @version      2.4.9
 // @author       Pixelbulb
 // @description  The Blooket Hacks 2 GUI will be accessible through a blooket icon in the bottom right of the screen. Tap it to run the GUI. Double-tap it to show/hide (it can still be tapped when hidden). This script should automatically update.
 // @match        https://*.blooket.com/*
@@ -14,15 +14,15 @@
 // ==/UserScript==
 if (location.hostname === 'pixelbulb.online') {
     window.tampermonkeyInstalled = true;
-    window.tampermonkeyVersion = '2.4.8';
+    window.tampermonkeyVersion = '2.4.9';
 } else {
     let i = document.createElement('iframe');
     document.body.append(i);
     window.alert = i.contentWindow.alert.bind(window);
     i.remove();
     if (!('tampermonkeyHelperInstalled' in window)) {
-        if (localStorage.getItem('tampermonkeyHelperPrompt') !== '2.4.8') {
-            localStorage.setItem('tampermonkeyHelperPrompt', '2.4.8');
+        if (localStorage.getItem('tampermonkeyHelperPrompt') !== '2.4.9') {
+            localStorage.setItem('tampermonkeyHelperPrompt', '2.4.9');
             if (confirm('The Tampermonkey Helper Script offers improvements to Blooket Hacks. Would you like to install it?')) {
                 const newWin = window.open('https://raw.githubusercontent.com/UtterDonkey/bh-gui/main/helper.user.js');
                 if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
@@ -100,7 +100,7 @@ if (location.hostname === 'pixelbulb.online') {
         await new Promise(r => setTimeout(r, 150));
         if (double) return;
         clearInterval(di);
-        if (new Date().getUTCMonth() !== 1) {
+        if (new Date().getUTCMonth() !== 1 && new Date().getUTCMonth() !== 2) {
             alert('Please update tampermonkey script');
             open('https://pixelbulb.online/bh-tamper-monkey');
             return;
