@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kahoot Hacks
 // @namespace    http://tampermonkey.net/
-// @version      0.0.2
+// @version      0.0.3
 // @description  Prototype Kahoot Hacks. Only works on challenges (ie. https://kahoot.io/challenge/*) with quiz/typing questions.
 // @author       You
 // @match        https://kahoot.it/*
@@ -49,7 +49,7 @@
     function findQuestion(params) {
         const questions = quizData.kahoot.questions;
         const answers = [];
-
+        const altAnswers = [];
         for(const q of questions) {
             let match = true;
             if(params.questionText && q.question !== params.questionText) match = false;
@@ -58,13 +58,13 @@
                 const closest = questions.toSorted((a, b) => levenshteinDistance(a.question, q)-levenshteinDistance(b.question, q));
                 let matches = params.choices ? closest.filter(e =>JSON.stringify(e.choices.map(e =>e.answer).toSorted()) === JSON.stringify(params.choices.toSorted())) : closest;
                 if(params.imgSrc && matches.find(e =>params.imgSrc.includes(e.imageMetadata?.id))) matches = matches.filter(e =>params.imgSrc.includes(e.imageMetadata?.id));
-                if(matches.map(e => JSON.stringify(e)).includes(JSON.stringify(q))) match = true;
+                if(matches.map(e => JSON.stringify(e)).includes(JSON.stringify(q))) altAnswers.push(q);
 
             }
             if(match) answers.push(q);
         }
 
-        return answers;
+        return answers.length < 1 ? altAnswers : answers;
     }
 
     function findAnswer(question) {
