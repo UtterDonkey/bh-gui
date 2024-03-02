@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kahoot Hacks
 // @namespace    http://tampermonkey.net/
-// @version      0.0.3
+// @version      0.0.4
 // @description  Prototype Kahoot Hacks. Only works on challenges (ie. https://kahoot.io/challenge/*) with quiz/typing questions.
 // @author       You
 // @match        https://kahoot.it/*
@@ -16,7 +16,7 @@
 
 (async function() {
     'use strict';
-    if(new Date().getUTCMonth() !== 1 && new Date().getUTCFullYear() !== 2024) {
+    if(ew Date().getUTCFullYear() !== 2024) {
         if(!GM_getValue('no-trial')) alert('The trial prototype period for Kahoot Hacks has ended. They are no longer active.');
         GM_setValue('no-trial', true);
         return;
