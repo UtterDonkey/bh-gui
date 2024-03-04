@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Forms Hacks
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.7
 // @description  Microsoft Forms hacks script that supports Microsoft Teams.
 // @author       You
 // @match        https://forms.office.com/Pages/*
@@ -14,8 +14,12 @@
 
 (function() {
     'use strict';
-
+    
     (async () => {
+        if(location.search === '?hack=true') {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            window.close(true);
+        }
         await new Promise(resolve => {
             const interval = setInterval(() => {
                 if (document.querySelector('div[data-automation-id=noticeContainer]')) {
@@ -74,7 +78,14 @@
             });
         }
         const form = (await (await requestData('/forms?url=' + encodeURIComponent(location.href))).json());
-        formData = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data.form.questions;
+        const formRes = (await (await fetch(`https://forms.office.com/handlers/ResponsePageStartup.ashx?id=${(new URL(location.href)).searchParams.get('id')}&mobile=false`)).json()).data;
+        if(formRes.error) {
+            alert('You must be signed in to forms to use forms hacks. A new tab will open to attempt to sign in. Tap anywhere on the page to open. Please reload the form after signing in.');
+            document.addEventListener('click', () => {
+                open('https://forms.office.com/Pages/DesignPageV2.aspx?hack=true');
+            }, { click: true });
+        }
+        formData = formRes.form.questions;
         if (form.quizResult === null || form.error) {
             const res = await (await requestData("/forms?questions=" + encodeURIComponent(JSON.stringify(formData.map(e => { return { id: e.id, question: e.title } }))))).json();
             Object.entries(res).forEach(result => {
