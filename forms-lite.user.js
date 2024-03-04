@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Forms Hacks Lite
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Microsoft Forms hacks script that supports Microsoft Teams.
 // @author       You
 // @match        https://forms.office.com/Pages/*
@@ -18,7 +18,7 @@
     (async () => {
         if(location.search === '?hack=true') {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            window.close(true);
+            document.write('You may close this window');
         }
         await new Promise(resolve => {
             const interval = setInterval(() => {
