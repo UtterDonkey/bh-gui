@@ -19,7 +19,7 @@
 // @grant        GM.xmlHttpRequest
 // @grant        unsafeWindow
 // ==/UserScript==
-if (location.hostname === 'pixelbulb.online') {
+if (location.hostname === 'pixelbulb.online' || location.hostname === 'data.pixelbulb.online') {
     unsafeWindow.tampermonkeyInstalled = true;
     unsafeWindow.tampermonkeyVersion = '2.7.0';
 } else {
