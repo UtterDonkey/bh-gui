@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube AdBlocker
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Block all YouTube ads with this simple script.
 // @author       UtterDonkey
 // @match        *://*.youtube.com/*
@@ -64,7 +64,6 @@
     let prevVolume = null;
     let prevSpeed = null;
     function getSponsors(subtitles) {
-        // console.log(subtitles);
         let sponsors = [];
         let sponsor = false;
         let sponsorStart = null;
@@ -100,8 +99,7 @@
                 if ((text.includes('sponsor') || text.includes('made possible by')) && !sponsor) {
                     sponsor = true;
                     sponsorStart = ev.tStartMs;
-                }
-                if (sponsor && ev.tStartMs - sponsorStart < 300_000 && ((iterations > 1 && ev.dDurationMs > 7000 && ev.segs.length === 1) || ((text.includes('get back to') || text.includes('now back to') || text.includes('s continue') || text.includes('let\'s start') || text.includes('s begin') || text.includes('s kick off') || text.includes('out of the way') || text.includes('let\'s get on')) && ((iterations > 0 && ev.tStartMs - sponsorStart < 100_000) || (iterations > 1 || ev.tStartMs - sponsorStart < 150_000))) || (iterations > 0 && (text.includes('the link') || text.includes('their link') || text.includes('our link')) || isEndChapter(ev.tStartMs / 1000, lastStart / 1000) || (iterations > 1 && video && pathData && ev.tStartMs > endPoint(sponsorStart / 1000) * 1000)))) {
+                } else if (sponsor && ev.tStartMs - sponsorStart < 300_000 && ((iterations > 1 && ev.dDurationMs > 7000 && ev.segs.length === 1) || ((text.includes('get back to') || text.includes('now back to') || text.includes('s continue') || text.includes('let\'s start') || text.includes('s begin') || text.includes('s kick off') || text.includes('out of the way') || text.includes('let\'s get on')) && ((iterations > 0 && ev.tStartMs - sponsorStart < 100_000) || (iterations > 1 || ev.tStartMs - sponsorStart < 150_000))) || (iterations > 0 && (text.includes('the link') || text.includes('their link') || text.includes('our link')) || isEndChapter(ev.tStartMs / 1000, lastStart / 1000) || (iterations > 1 && video && pathData && ev.tStartMs > endPoint(sponsorStart / 1000) * 1000)))) {
                     sponsor = false;
                     if (ev.tStartMs - sponsorStart > 5000 && !sponsors.find(s => s[0] === sponsorStart)) sponsors.push([sponsorStart, (iterations > 1 && video && pathData && ev.tStartMs > endPoint(sponsorStart / 1000) * 1000) ? lastStart : (ev.tStartMs + ((isNaN(ev.dDurationMs) || ev.dDurationMs > 7000) ? 0 : ev.dDurationMs))]);
                 }
