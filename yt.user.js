@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube AdBlocker
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Block all YouTube ads with this simple script.
 // @author       UtterDonkey
 // @match        *://*.youtube.com/*
@@ -149,7 +149,7 @@
         }
         return open.call(this, method, url, ...rest);
     };
-    let skipSpeed = 2.5;
+    let skipSpeed = 1;
     setInterval(() => {
         try {
             const ad = document.querySelector('div.ad-showing')?.querySelector?.('video');
