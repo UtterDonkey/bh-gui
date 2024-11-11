@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kahoot Hacks
 // @namespace    http://tampermonkey.net/
-// @version      0.0.4
+// @version      0.0.5
 // @description  Prototype Kahoot Hacks. Only works on challenges (ie. https://kahoot.io/challenge/*) with quiz/typing questions.
 // @author       You
 // @match        https://kahoot.it/*
