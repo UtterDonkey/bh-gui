@@ -30,7 +30,6 @@
         });
     });
 
-
     const quizData = await new Promise(resolve => {
         async function getQuizData () {
             const quizId = location.href.split('/').pop();
@@ -55,8 +54,8 @@
             if(params.questionText && q.question !== params.questionText) match = false;
             if(params.imgSrc && !params.imgSrc.includes(q.imageMetadata?.id)) match = false;
             if(params.questionText && !match) {
-                const closest = questions.toSorted((a, b) => levenshteinDistance(a.question, q)-levenshteinDistance(b.question, q));
-                let matches = params.choices ? closest.filter(e =>JSON.stringify(e.choices.map(e =>e.answer).toSorted()) === JSON.stringify(params.choices.toSorted())) : closest;
+                const closest = questions.toSorted((a, b) => levenshteinDistance(a.question || '', q)-levenshteinDistance(b.question || '', q));
+                let matches = params.choices ? closest.filter(e =>JSON.stringify((e.choices || []).map(e =>e.answer).toSorted()) === JSON.stringify(params.choices.toSorted())) : closest;
                 if(params.imgSrc && matches.find(e =>params.imgSrc.includes(e.imageMetadata?.id))) matches = matches.filter(e =>params.imgSrc.includes(e.imageMetadata?.id));
                 if(matches.map(e => JSON.stringify(e)).includes(JSON.stringify(q))) altAnswers.push(q);
 
