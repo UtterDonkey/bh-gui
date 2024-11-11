@@ -16,7 +16,7 @@
 
 (async function() {
     'use strict';
-    if(ew Date().getUTCFullYear() !== 2024) {
+    if(new Date().getUTCFullYear() !== 2024) {
         if(!GM_getValue('no-trial')) alert('The trial prototype period for Kahoot Hacks has ended. They are no longer active.');
         GM_setValue('no-trial', true);
         return;
