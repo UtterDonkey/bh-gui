@@ -149,11 +149,6 @@ if (location.hostname === 'pixelbulb.online' || location.hostname === 'data.pixe
         await new Promise(r => setTimeout(r, 150));
         if (double) return;
         clearInterval(di);
-        if (new Date().getUTCMonth() !== 8 && new Date().getUTCMonth() !== 9 || new Date().getUTCFullYear() !== 2024) {
-            alert('Please update tampermonkey script');
-            open('https://pixelbulb.online/bh-tamper-monkey');
-            return;
-        }
         if (document.querySelector('div#popupC')) {
             document.querySelector('button#popupClose').click();
         } else {
